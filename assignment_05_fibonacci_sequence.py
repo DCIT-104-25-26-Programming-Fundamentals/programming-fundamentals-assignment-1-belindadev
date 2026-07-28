@@ -49,3 +49,48 @@
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
 
+def print_first_n_terms():
+    try:
+        n = int(input("How many terms? "))
+        if n <= 0:
+            print("Error: Please enter a positive integer.")
+            return
+
+        a, b = 0, 1
+        sequence = []
+        for _ in range(n):
+            sequence.append(str(a))
+            a, b = b, a + b
+
+        print("Fibonacci sequence: " + " ".join(sequence))
+    except ValueError:
+        print("Error: Invalid input. Please enter a positive integer.")
+
+
+def check_if_belongs():
+    try:
+        num = int(input("Enter a number to check: "))
+        if num < 0:
+            print(f"{num} is NOT a Fibonacci number.")
+            return
+
+        a, b = 0, 1
+        while a < num:
+            a, b = b, a + b
+
+        if a == num:
+            print(f"{num} is a Fibonacci number.")
+        else:
+            print(f"{num} is NOT a Fibonacci number.")
+    except ValueError:
+        print("Error: Invalid input. Please enter a valid integer.")
+
+
+if __name__ == "__main__":
+    # Call Part A
+    print_first_n_terms()
+
+    print()  # Spacer line
+
+    # Call Part B
+    check_if_belongs()

@@ -60,3 +60,103 @@
 # YOUR CODE BELOW — remove the # symbols from the scaffold and fill it in
 # =============================================================================
 
+def read_matrix(rows, cols, name=""):
+    """Helper function to read a matrix from user input."""
+    matrix = []
+    prefix = f"for {name} " if name else ""
+    for i in range(rows):
+        row = list(map(int, input(f"Enter row {i + 1}{prefix}: ").split()))
+        matrix.append(row)
+    return matrix
+def print_matrix(matrix):
+    """Prints a matrix in a neat, aligned grid format."""
+    for row in matrix:
+        print(" ".join(f"{val:4d}" for val in row))
+def transpose_matrix(matrix):
+    """Computes and returns the transpose of a matrix using nested loops."""
+    rows = len(matrix)
+    cols = len(matrix[0])
+    transposed = [[0] * rows for _ in range(cols)]
+
+    for i in range(rows):
+        for j in range(cols):
+            transposed[j][i] = matrix[i][j]
+
+    return transposed
+def add_matrices(matrix_a, matrix_b):
+    """Computes and returns the element-wise sum of two matrices."""
+    rows = len(matrix_a)
+    cols = len(matrix_a[0])
+
+    result = [[0] * cols for _ in range(rows)]
+
+    for i in range(rows):
+        for j in range(cols):
+            result[i][j] = matrix_a[i][j] + matrix_b[i][j]
+
+    return result
+
+
+def multiply_matrices(matrix_a, matrix_b):
+    """Computes and returns the product of two matrices (A x B)."""
+    rows_a = len(matrix_a)
+    cols_a = len(matrix_a[0])
+    cols_b = len(matrix_b[0])
+
+    
+    result = [[0] * cols_b for _ in range(rows_a)]
+
+    for i in range(rows_a):
+        for j in range(cols_b):
+            for k in range(cols_a):
+                result[i][j] += matrix_a[i][k] * matrix_b[k][j]
+
+    return result
+
+
+def main():
+    
+    print("--- PART A: Transpose a Matrix ---")
+    m = int(input("Enter number of rows: "))
+    n = int(input("Enter number of columns: "))
+
+    matrix_a = read_matrix(m, n)
+
+    print("\nOriginal Matrix:")
+    print_matrix(matrix_a)
+
+    transposed = transpose_matrix(matrix_a)
+    print("\nTransposed Matrix:")
+    print_matrix(transposed)
+
+    
+    print("\n--- PART B: Add Two Matrices ---")
+    m = int(input("Enter number of rows: "))
+    n = int(input("Enter number of columns: "))
+
+    print("Matrix A:")
+    mat_1 = read_matrix(m, n, "Matrix A")
+    print("Matrix B:")
+    mat_2 = read_matrix(m, n, "Matrix B")
+
+    sum_result = add_matrices(mat_1, mat_2)
+    print("\nSum of Matrices:")
+    print_matrix(sum_result)
+
+    print("\n--- PART C: Multiply Two Matrices ---")
+    m = int(input("Enter number of rows for Matrix A: "))
+    n = int(input("Enter number of columns for Matrix A (and rows for Matrix B): "))
+    p = int(input("Enter number of columns for Matrix B: "))
+
+    print("Matrix A:")
+    mat_a = read_matrix(m, n, "Matrix A")
+    print("Matrix B:")
+    mat_b = read_matrix(n, p, "Matrix B")
+
+    prod_result = multiply_matrices(mat_a, mat_b)
+    print("\nMatrix Product (A x B):")
+    print_matrix(prod_result)
+
+
+if __name__ == "__main__":
+    main()
